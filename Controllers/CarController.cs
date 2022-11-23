@@ -59,7 +59,7 @@ namespace WebClientWebApi2.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             CarDAL carDAL = new CarDAL();
-            Car car = new Car();
+            Car car;
 
             car = await carDAL.GetCar(id);
 
@@ -112,8 +112,7 @@ namespace WebClientWebApi2.Controllers
 
             return View(car);
         }
-
-        // POST: Prueba/Delete/5
+                
         [HttpPost]
         public async Task<ActionResult> Delete(int id, FormCollection collection)
         {

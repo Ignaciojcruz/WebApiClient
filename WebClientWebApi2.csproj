@@ -126,12 +126,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PruebaController.cs" />
+    <Compile Include="Controllers\TrackController.cs" />
+    <Compile Include="Controllers\TrackTimeController.cs" />
     <Compile Include="DAL\CarDAL.cs" />
+    <Compile Include="DAL\TrackDAL.cs" />
+    <Compile Include="DAL\TrackTimeDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\Track.cs" />
+    <Compile Include="Models\TrackTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +186,16 @@
     <Content Include="Views\Car\Edit.cshtml" />
     <Content Include="Views\Car\Details.cshtml" />
     <Content Include="Views\Car\Delete.cshtml" />
+    <Content Include="Views\Track\Index.cshtml" />
+    <Content Include="Views\Track\Create.cshtml" />
+    <Content Include="Views\Track\Delete.cshtml" />
+    <Content Include="Views\Track\Details.cshtml" />
+    <Content Include="Views\Track\Edit.cshtml" />
+    <Content Include="Views\TrackTime\Index.cshtml" />
+    <Content Include="Views\TrackTime\Create.cshtml" />
+    <Content Include="Views\TrackTime\Delete.cshtml" />
+    <Content Include="Views\TrackTime\Details.cshtml" />
+    <Content Include="Views\TrackTime\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
