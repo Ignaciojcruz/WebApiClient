@@ -128,6 +128,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Controllers\TrackTimeController.cs" />
+    <Compile Include="Controllers\TrackTimeVwController.cs" />
     <Compile Include="DAL\CarDAL.cs" />
     <Compile Include="DAL\TrackDAL.cs" />
     <Compile Include="DAL\TrackTimeDAL.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Models\TrackTime.cs" />
+    <Compile Include="Models\TrackTimeVw.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -196,10 +198,10 @@
     <Content Include="Views\TrackTime\Delete.cshtml" />
     <Content Include="Views\TrackTime\Details.cshtml" />
     <Content Include="Views\TrackTime\Edit.cshtml" />
+    <Content Include="Views\TrackTimeVw\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Prueba\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
