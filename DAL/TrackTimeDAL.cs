@@ -126,5 +126,49 @@ namespace WebClientWebApi2.DAL
             }
             return list;
         }
+
+        public async Task<TrackTimeVw> GetTrackTimeVw(int id)
+        {
+            List<TrackTimeVw> list = new List<TrackTimeVw>();
+            List<TrackTime> lsTT;
+
+            TrackDAL trackDAL = new TrackDAL();
+            List<Track> lsT = new List<Track>();
+
+            CarDAL carDAL = new CarDAL();
+            List<Car> lsC = new List<Car>();
+
+            //buscar tracktimes            
+            lsTT = await GetTrackTimes();
+
+            //buscar tracks
+            lsT = await trackDAL.GetTracks();
+
+            //buscar cars
+            lsC = await carDAL.GetCars();
+
+            //hacer join con linq y devolver tracktimevw
+            var result = from tt in lsTT where tt.Id == id
+                         join t in lsT on tt.IdTrack equals t.Id
+                         select new { tt.Id, tt.IdTrack, tt.IdCar, t.Name, tt.BestTimeLap } into inter
+                         join c in lsC on inter.IdCar equals c.Id
+                         select new { inter.Id, inter.IdCar, c.Brand, c.Model, inter.IdTrack, inter.Name, inter.BestTimeLap }
+                         ;
+
+            foreach (var item in result)
+            {
+                TrackTimeVw ttv = new TrackTimeVw();
+                ttv.Id = item.Id;
+                ttv.idCar = item.IdCar;
+                ttv.BrandCar = item.Brand;
+                ttv.ModelCar = item.Model;
+                ttv.IdTrack = item.IdTrack;
+                ttv.NameTrack = item.Name;
+                ttv.BestTimeLap = item.BestTimeLap;
+                ttv.IsDeleted = false;
+                list.Add(ttv);
+            }
+            return list.First();
+        }
     }
 }
