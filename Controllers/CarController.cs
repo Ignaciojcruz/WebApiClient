@@ -35,7 +35,7 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                
                 CarDAL carDAL = new CarDAL();
                 Car car = new Car();
 
@@ -72,7 +72,7 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                
                 CarDAL carDAL = new CarDAL();
                 Car car = new Car();
 
@@ -118,7 +118,7 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                
                 CarDAL carDAL = new CarDAL();
                 Car car = new Car();
 

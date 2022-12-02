@@ -7,13 +7,14 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using WebClientWebApi2.Models;
+using System.Configuration;
 
 
 namespace WebClientWebApi2.DAL
 {
     public class BrandDAL
     {
-        string Baseurl = "http://localhost:62451/";
+        string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
         public async Task<List<Brand>> GetBrands()
         {
             List<Brand> brands = new List<Brand>(); //
@@ -33,7 +34,7 @@ namespace WebClientWebApi2.DAL
                 }
             }
 
-            return brands; //
+            return brands; 
         }
 
         public async Task<Brand> GetBrand(int id)
@@ -47,7 +48,6 @@ namespace WebClientWebApi2.DAL
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage res = await client.GetAsync("api/Brand?id=" + id.ToString());
-
 
                 if (res.IsSuccessStatusCode)
                 {

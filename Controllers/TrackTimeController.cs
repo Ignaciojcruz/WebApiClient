@@ -33,7 +33,7 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                
                 TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
                 TrackTime trackTime = new TrackTime();
 
@@ -69,7 +69,7 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                
                 TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
                 TrackTime trackTime = new TrackTime();
 
@@ -114,7 +114,7 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-                // TODO: Add update logic here
+                
                 TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
                 TrackTime trackTime = new TrackTime();
 

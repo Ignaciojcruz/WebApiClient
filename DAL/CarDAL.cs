@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -12,7 +13,7 @@ namespace WebClientWebApi2.DAL
 {
     public class CarDAL
     {
-        string Baseurl = "http://localhost:62451/";
+        string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
         public async Task<List<Car>> GetCars()
         {
             List<Car> cars = new List<Car>(); //

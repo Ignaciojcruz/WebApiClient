@@ -7,12 +7,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using WebClientWebApi2.Models;
+using System.Configuration;
 
 namespace WebClientWebApi2.DAL
 {
     public class TrackDAL
     {
-        string Baseurl = "http://localhost:62451/";
+        string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
         public async Task<List<Track>> GetTracks()
         {
             List<Track> tracks = new List<Track>(); 
