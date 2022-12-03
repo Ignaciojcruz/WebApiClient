@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebClientWebApi2.Models;
-using WebClientWebApi2.DAL;
+using WebClientWebApi2.Negocio;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -17,17 +17,19 @@ namespace WebClientWebApi2.Controllers
                 
         public async Task<ActionResult> Index()
         {
-            CarDAL carDAL = new CarDAL();
+            CarNG carNG = new CarNG();
             List<Car> cars = new List<Car>();
 
-            cars = await carDAL.GetCars();
+            cars = await carNG.GetCars();
             
             return View(cars);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            CarNG carNG = new CarNG();
+            Car car = await carNG.GetCreateCar();
+            return View(car);
         }
 
         [HttpPost]
@@ -36,17 +38,17 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                CarDAL carDAL = new CarDAL();
+                CarNG carNG = new CarNG();
                 Car car = new Car();
 
                 car.Id = Convert.ToInt32(collection["Id"]);
-                car.Brand = collection["Brand"].ToString();
-                car.Model = collection["Model"].ToString();
+                car.IdBrand = Convert.ToInt32(collection["IdBrand"].ToString());
+                car.IdModel = Convert.ToInt32(collection["IdModel"].ToString());
                 car.Year = Convert.ToInt32(collection["Year"]);
-                car.Type = collection["Type"].ToString();
-                car.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
+                car.IdType = Convert.ToInt32(collection["IdType"].ToString());
+                car.IsDeleted = Convert.ToBoolean(collection["IsDeleted"].ToString().Contains("true"));
 
-                int resp = await carDAL.SetCar(car);
+                int resp = await carNG.SetCar(car);
 
                 return RedirectToAction("Index");
             }
@@ -58,10 +60,10 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            CarDAL carDAL = new CarDAL();
+            CarNG carNG = new CarNG();
             Car car;
 
-            car = await carDAL.GetCar(id);
+            car = await carNG.GetCar(id);
 
             return View(car);
         }
@@ -73,17 +75,17 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                CarDAL carDAL = new CarDAL();
+                CarNG carNG = new CarNG();
                 Car car = new Car();
 
                 car.Id = Convert.ToInt32(collection["Id"]);
-                car.Brand = collection["Brand"].ToString();
-                car.Model = collection["Model"].ToString();
+                car.IdBrand = Convert.ToInt32(collection["IdBrand"].ToString());
+                car.IdModel = Convert.ToInt32(collection["IdModel"].ToString());
                 car.Year = Convert.ToInt32(collection["Year"]);
-                car.Type = collection["Type"].ToString();
-                car.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
+                car.IdType = Convert.ToInt32(collection["IdType"].ToString());
+                car.IsDeleted = Convert.ToBoolean(collection["IsDeleted"].ToString().Contains("true"));
 
-                int resp = await carDAL.SetCar(car);
+                int resp = await carNG.SetCar(car);
 
                 return RedirectToAction("Index");
             }
@@ -95,20 +97,20 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Details(int id)
         {
-            CarDAL carDAL = new CarDAL();
+            CarNG carNG = new CarNG();
             Car car = new Car();
 
-            car = await carDAL.GetCar(id);
+            car = await carNG.GetCar(id);
 
             return View(car);
         }
 
         public async Task<ActionResult> Delete(int id)
         {
-            CarDAL carDAL = new CarDAL();
+            CarNG carNG = new CarNG();
             Car car = new Car();
 
-            car = await carDAL.GetCar(id);
+            car = await carNG.GetCar(id);
 
             return View(car);
         }
@@ -119,13 +121,13 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                CarDAL carDAL = new CarDAL();
+                CarNG carNG = new CarNG();
                 Car car = new Car();
 
                 car.Id = id;
                 car.IsDeleted = true;
 
-                int resp = await carDAL.SetCar(car);
+                int resp = await carNG.SetCar(car);
 
                 return RedirectToAction("Index");
             }

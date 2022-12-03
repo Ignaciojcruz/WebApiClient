@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebClientWebApi2.Models.Car>
+﻿@model IEnumerable<WebClientWebApi2.Models.Country>
 
 @{
     ViewBag.Title = "Index";
@@ -12,16 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NameBrand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NameModel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Year)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NameType)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsDeleted)
@@ -32,16 +23,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.NameBrand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameModel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameType)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsDeleted)

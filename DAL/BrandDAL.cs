@@ -15,6 +15,8 @@ namespace WebClientWebApi2.DAL
     public class BrandDAL
     {
         string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
+        string modelUrl = "api/Brand";
+
         public async Task<List<Brand>> GetBrands()
         {
             List<Brand> brands = new List<Brand>(); //
@@ -25,7 +27,7 @@ namespace WebClientWebApi2.DAL
                 client.DefaultRequestHeaders.Clear();
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("api/Brand"); //
+                HttpResponseMessage Res = await client.GetAsync(modelUrl); //
 
                 if (Res.IsSuccessStatusCode)
                 {
@@ -47,7 +49,7 @@ namespace WebClientWebApi2.DAL
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage res = await client.GetAsync("api/Brand?id=" + id.ToString());
+                HttpResponseMessage res = await client.GetAsync(modelUrl + "?id=" + id.ToString());
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -71,7 +73,7 @@ namespace WebClientWebApi2.DAL
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Baseurl + "api/Brand");
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Baseurl + modelUrl);
                 request.Content = content;
 
                 HttpResponseMessage res = await client.SendAsync(request);

@@ -14,6 +14,7 @@ namespace WebClientWebApi2.DAL
     public class CarDAL
     {
         string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
+        string modelUrl = "api/Car";
         public async Task<List<Car>> GetCars()
         {
             List<Car> cars = new List<Car>(); //
@@ -24,7 +25,7 @@ namespace WebClientWebApi2.DAL
                 client.DefaultRequestHeaders.Clear();
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage Res = await client.GetAsync("api/Car"); //
+                HttpResponseMessage Res = await client.GetAsync(modelUrl); //
 
                 if (Res.IsSuccessStatusCode)
                 {
@@ -46,7 +47,7 @@ namespace WebClientWebApi2.DAL
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage res = await client.GetAsync("api/Car?id=" + id.ToString());
+                HttpResponseMessage res = await client.GetAsync(modelUrl + "?id=" + id.ToString());
 
 
                 if (res.IsSuccessStatusCode)

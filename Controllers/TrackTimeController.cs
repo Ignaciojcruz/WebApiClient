@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebClientWebApi2.DAL;
+using WebClientWebApi2.Negocio;
 using WebClientWebApi2.Models;
 
 namespace WebClientWebApi2.Controllers
@@ -13,19 +13,22 @@ namespace WebClientWebApi2.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+            TrackTimeNG trackTimeNG = new TrackTimeNG();
             List<TrackTime> trackTimes = new List<TrackTime>();
 
-            trackTimes = await trackTimeDAL.GetTrackTimes();
+            trackTimes = await trackTimeNG.GetTrackTimes();
 
             //TODO - retornar TrackTimeVw
 
             return View(trackTimes);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            TrackTimeNG trackTimeNG = new TrackTimeNG();
+            TrackTime trackTime = await trackTimeNG.GetTrackTimeCreate();
+
+            return View(trackTime);
         }
 
         [HttpPost]
@@ -34,7 +37,7 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+                TrackTimeNG trackTimeNG = new TrackTimeNG();
                 TrackTime trackTime = new TrackTime();
 
                 trackTime.Id = Convert.ToInt32(collection["Id"]);
@@ -43,7 +46,7 @@ namespace WebClientWebApi2.Controllers
                 trackTime.BestTimeLap = TimeSpan.Parse(collection["BestTimeLap"].ToString());
                 trackTime.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await trackTimeDAL.SetTrackTime(trackTime);
+                int resp = await trackTimeNG.SetTrackTime(trackTime);
 
                 return RedirectToAction("Index");
             }
@@ -55,10 +58,10 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+            TrackTimeNG trackTimeNG = new TrackTimeNG();
             TrackTime trackTime;
 
-            trackTime = await trackTimeDAL.GetTrackTime(id);
+            trackTime = await trackTimeNG.GetTrackTime(id);
 
             return View(trackTime);
         }
@@ -70,7 +73,7 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+                TrackTimeNG trackTimeNG = new TrackTimeNG();
                 TrackTime trackTime = new TrackTime();
 
                 trackTime.Id = Convert.ToInt32(collection["Id"]);
@@ -79,7 +82,7 @@ namespace WebClientWebApi2.Controllers
                 trackTime.BestTimeLap = TimeSpan.Parse(collection["BestTimeLap"].ToString());
                 trackTime.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await trackTimeDAL.SetTrackTime(trackTime);
+                int resp = await trackTimeNG.SetTrackTime(trackTime);
 
                 return RedirectToAction("Index");
             }
@@ -91,20 +94,20 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Details(int id)
         {
-            TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+            TrackTimeNG trackTimeNG = new TrackTimeNG();
             TrackTime trackTime = new TrackTime();
 
-            trackTime = await trackTimeDAL.GetTrackTime(id);
+            trackTime = await trackTimeNG.GetTrackTime(id);
 
             return View(trackTime);
         }
 
         public async Task<ActionResult> Delete(int id)
         {
-            TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+            TrackTimeNG trackTimeNG = new TrackTimeNG();
             TrackTime trackTime = new TrackTime();
 
-            trackTime = await trackTimeDAL.GetTrackTime(id);
+            trackTime = await trackTimeNG.GetTrackTime(id);
 
             return View(trackTime);
         }
@@ -115,13 +118,13 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+                TrackTimeNG trackTimeNG = new TrackTimeNG();
                 TrackTime trackTime = new TrackTime();
 
                 trackTime.Id = id;
                 trackTime.IsDeleted = true;
 
-                int resp = await trackTimeDAL.SetTrackTime(trackTime);
+                int resp = await trackTimeNG.SetTrackTime(trackTime);
 
                 return RedirectToAction("Index");
             }

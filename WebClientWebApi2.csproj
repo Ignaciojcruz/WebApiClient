@@ -126,22 +126,35 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ModelController.cs" />
     <Compile Include="Controllers\TrackController.cs" />
     <Compile Include="Controllers\TrackTimeController.cs" />
     <Compile Include="Controllers\TrackTimeVwController.cs" />
+    <Compile Include="Controllers\TypeController.cs" />
     <Compile Include="DAL\BrandDAL.cs" />
     <Compile Include="DAL\CarDAL.cs" />
+    <Compile Include="DAL\CountryDAL.cs" />
+    <Compile Include="DAL\ModelDAL.cs" />
     <Compile Include="DAL\TrackDAL.cs" />
     <Compile Include="DAL\TrackTimeDAL.cs" />
+    <Compile Include="DAL\TypeDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Models\TrackTime.cs" />
     <Compile Include="Models\TrackTimeVw.cs" />
+    <Compile Include="Models\Type.cs" />
+    <Compile Include="Negocio\BrandNG.cs" />
+    <Compile Include="Negocio\CarNG.cs" />
+    <Compile Include="Negocio\ModelNG.cs" />
+    <Compile Include="Negocio\TrackTimeNG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +219,25 @@
     <Content Include="Views\TrackTimeVw\Details.cshtml" />
     <Content Include="Views\TrackTimeVw\Create.cshtml" />
     <Content Include="Views\Brand\Index.cshtml" />
+    <Content Include="Views\Brand\Create.cshtml" />
+    <Content Include="Views\Brand\Delete.cshtml" />
+    <Content Include="Views\Brand\Details.cshtml" />
+    <Content Include="Views\Brand\Edit.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\Create.cshtml" />
+    <Content Include="Views\Country\Delete.cshtml" />
+    <Content Include="Views\Country\Details.cshtml" />
+    <Content Include="Views\Country\Edit.cshtml" />
+    <Content Include="Views\Model\Index.cshtml" />
+    <Content Include="Views\Model\Create.cshtml" />
+    <Content Include="Views\Model\Delete.cshtml" />
+    <Content Include="Views\Model\Details.cshtml" />
+    <Content Include="Views\Model\Edit.cshtml" />
+    <Content Include="Views\Type\Index.cshtml" />
+    <Content Include="Views\Type\Create.cshtml" />
+    <Content Include="Views\Type\Delete.cshtml" />
+    <Content Include="Views\Type\Details.cshtml" />
+    <Content Include="Views\Type\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

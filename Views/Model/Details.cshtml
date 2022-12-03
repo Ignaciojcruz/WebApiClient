@@ -1,4 +1,4 @@
-﻿@model WebClientWebApi2.Models.Car
+﻿@model WebClientWebApi2.Models.Model
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Car</h4>
+    <h4>Model</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,27 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NameModel)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.NameModel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Year)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NameType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NameType)
+            @Html.DisplayFor(model => model.Name)
         </dd>
 
         <dt>

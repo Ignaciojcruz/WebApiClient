@@ -1,23 +1,24 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using WebClientWebApi2.Models;
-using System.Configuration;
 
 namespace WebClientWebApi2.DAL
 {
-    public class TrackDAL
+    public class ModelDAL
     {
         string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
-        string modelUrl = "api/Track";
-        public async Task<List<Track>> GetTracks()
+        string modelUrl = "api/Model";
+
+        public async Task<List<Model>> GetModels()
         {
-            List<Track> tracks = new List<Track>(); 
+            List<Model> models = new List<Model>(); //
 
             using (var client = new HttpClient())
             {
@@ -29,18 +30,18 @@ namespace WebClientWebApi2.DAL
 
                 if (Res.IsSuccessStatusCode)
                 {
-                    var TrackResponse = Res.Content.ReadAsStringAsync().Result;
-                    tracks = JsonConvert.DeserializeObject<List<Track>>(TrackResponse);//
+                    var modelResponse = Res.Content.ReadAsStringAsync().Result;
+                    models = JsonConvert.DeserializeObject<List<Model>>(modelResponse);//
                 }
             }
 
-            return tracks; //
+            return models;
         }
 
-        public async Task<Track> GetTrack(int id)
+        public async Task<Model> GetModel(int id)
         {
-            Track track = new Track();
-            track.Id = id;
+            Model model = new Model();
+            model.Id = id;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
@@ -51,14 +52,14 @@ namespace WebClientWebApi2.DAL
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var TrackResponse = res.Content.ReadAsStringAsync().Result;
-                    track = JsonConvert.DeserializeObject<Track>(TrackResponse);
+                    var modelResponse = res.Content.ReadAsStringAsync().Result;
+                    model = JsonConvert.DeserializeObject<Model>(modelResponse);
                 }
             }
-            return track;
+            return model;
         }
 
-        public async Task<int> SetTrack(Track track)
+        public async Task<int> SetModel(Model model)
         {
             int resp = 0;
 
@@ -67,7 +68,7 @@ namespace WebClientWebApi2.DAL
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
 
-                var json = JsonConvert.SerializeObject(track);
+                var json = JsonConvert.SerializeObject(model);
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
@@ -78,7 +79,7 @@ namespace WebClientWebApi2.DAL
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var trackResponse = res.Content.ReadAsStringAsync().Result;
+                    var modelResponse = res.Content.ReadAsStringAsync().Result;
                     resp = 1;
                 }
 

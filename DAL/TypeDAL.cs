@@ -1,27 +1,27 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System.Web;
 using WebClientWebApi2.Models;
 using System.Configuration;
 
+
 namespace WebClientWebApi2.DAL
 {
-    public class TrackDAL
+    public class TypeDAL
     {
         string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
-        string modelUrl = "api/Track";
-        public async Task<List<Track>> GetTracks()
+        string modelUrl = "api/Type";
+
+        public async Task<List<Type>> GetTypes()
         {
-            List<Track> tracks = new List<Track>(); 
+            List<Type> types = new List<Type>(); //
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Baseurl);
+                client.BaseAddress = new System.Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -29,21 +29,21 @@ namespace WebClientWebApi2.DAL
 
                 if (Res.IsSuccessStatusCode)
                 {
-                    var TrackResponse = Res.Content.ReadAsStringAsync().Result;
-                    tracks = JsonConvert.DeserializeObject<List<Track>>(TrackResponse);//
+                    var typeResponse = Res.Content.ReadAsStringAsync().Result;
+                    types = JsonConvert.DeserializeObject<List<Type>>(typeResponse);//
                 }
             }
 
-            return tracks; //
+            return types;
         }
 
-        public async Task<Track> GetTrack(int id)
+        public async Task<Type> GetType(int id)
         {
-            Track track = new Track();
-            track.Id = id;
+            Type type = new Type();
+            type.Id = id;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Baseurl);
+                client.BaseAddress = new System.Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -51,23 +51,23 @@ namespace WebClientWebApi2.DAL
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var TrackResponse = res.Content.ReadAsStringAsync().Result;
-                    track = JsonConvert.DeserializeObject<Track>(TrackResponse);
+                    var typeResponse = res.Content.ReadAsStringAsync().Result;
+                    type = JsonConvert.DeserializeObject<Type>(typeResponse);
                 }
             }
-            return track;
+            return type;
         }
 
-        public async Task<int> SetTrack(Track track)
+        public async Task<int> SetType(Type type)
         {
             int resp = 0;
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(Baseurl);
+                client.BaseAddress = new System.Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
 
-                var json = JsonConvert.SerializeObject(track);
+                var json = JsonConvert.SerializeObject(type);
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
@@ -78,7 +78,7 @@ namespace WebClientWebApi2.DAL
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var trackResponse = res.Content.ReadAsStringAsync().Result;
+                    var typeResponse = res.Content.ReadAsStringAsync().Result;
                     resp = 1;
                 }
 

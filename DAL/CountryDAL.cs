@@ -1,23 +1,24 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using WebClientWebApi2.Models;
-using System.Configuration;
 
 namespace WebClientWebApi2.DAL
 {
-    public class TrackDAL
+    public class CountryDAL
     {
         string Baseurl = ConfigurationManager.AppSettings["UrlApi"];
-        string modelUrl = "api/Track";
-        public async Task<List<Track>> GetTracks()
+        string modelUrl = "api/Country";
+
+        public async Task<List<Country>> GetCountrys()
         {
-            List<Track> tracks = new List<Track>(); 
+            List<Country> countrys = new List<Country>(); //
 
             using (var client = new HttpClient())
             {
@@ -29,18 +30,18 @@ namespace WebClientWebApi2.DAL
 
                 if (Res.IsSuccessStatusCode)
                 {
-                    var TrackResponse = Res.Content.ReadAsStringAsync().Result;
-                    tracks = JsonConvert.DeserializeObject<List<Track>>(TrackResponse);//
+                    var countryResponse = Res.Content.ReadAsStringAsync().Result;
+                    countrys = JsonConvert.DeserializeObject<List<Country>>(countryResponse);//
                 }
             }
 
-            return tracks; //
+            return countrys;
         }
 
-        public async Task<Track> GetTrack(int id)
+        public async Task<Country> GetCountry(int id)
         {
-            Track track = new Track();
-            track.Id = id;
+            Country country = new Country();
+            country.Id = id;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseurl);
@@ -51,14 +52,14 @@ namespace WebClientWebApi2.DAL
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var TrackResponse = res.Content.ReadAsStringAsync().Result;
-                    track = JsonConvert.DeserializeObject<Track>(TrackResponse);
+                    var countryResponse = res.Content.ReadAsStringAsync().Result;
+                    country = JsonConvert.DeserializeObject<Country>(countryResponse);
                 }
             }
-            return track;
+            return country;
         }
 
-        public async Task<int> SetTrack(Track track)
+        public async Task<int> SetCountry(Country country)
         {
             int resp = 0;
 
@@ -67,7 +68,7 @@ namespace WebClientWebApi2.DAL
                 client.BaseAddress = new Uri(Baseurl);
                 client.DefaultRequestHeaders.Clear();
 
-                var json = JsonConvert.SerializeObject(track);
+                var json = JsonConvert.SerializeObject(country);
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
@@ -78,7 +79,7 @@ namespace WebClientWebApi2.DAL
 
                 if (res.IsSuccessStatusCode)
                 {
-                    var trackResponse = res.Content.ReadAsStringAsync().Result;
+                    var countryResponse = res.Content.ReadAsStringAsync().Result;
                     resp = 1;
                 }
 
