@@ -9,6 +9,7 @@ namespace WebClientWebApi2.Models
     public class Car
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public int IdBrand { get; set; }
         public string NameBrand { get; set; }
         public int IdModel { get; set; }

@@ -128,7 +128,6 @@ namespace WebClientWebApi2.DAL
             //}
             return list;
         }
-
         public async Task<TrackTimeVw> GetTrackTimeVw(int id)
         {
             List<TrackTimeVw> list = new List<TrackTimeVw>();

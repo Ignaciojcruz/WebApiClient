@@ -40,6 +40,7 @@ namespace WebClientWebApi2.Negocio
             {
                 Car car = new Car();
                 car.Id = item.Id;
+                car.Name = item.NameBrand + " " + item.NameModel + " " + item.Year.ToString();
                 car.IdBrand = item.IdBrand;
                 car.NameBrand = item.NameBrand;
                 car.IdModel = item.IdModel;

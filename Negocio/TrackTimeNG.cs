@@ -16,9 +16,34 @@ namespace WebClientWebApi2.Negocio
         public async Task<List<TrackTime>> GetTrackTimes()
         {
             TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
-            List<TrackTime> trackTimes;
+            List<TrackTime> trackTimeList;
 
-            trackTimes = await trackTimeDAL.GetTrackTimes();
+            trackTimeList = await trackTimeDAL.GetTrackTimes();
+
+            CarNG carNG = new CarNG();
+            List<Car> carList = await carNG.GetCars();
+            TrackDAL trackDAL = new TrackDAL();
+            List<Track> trackList = await trackDAL.GetTracks();
+
+            var result = from tt in trackTimeList
+                         join c in carList on tt.IdCar equals c.Id
+                         select new { tt.Id, tt.IdCar, NameCar = c.Name, tt.IdTrack, tt.BestTimeLap, tt.IsDeleted } into res1
+                         join t in trackList on res1.IdTrack equals t.Id
+                         select new { res1.Id, res1.IdCar, res1.NameCar, res1.IdTrack, NameTrack = t.Name, res1.BestTimeLap, res1.IsDeleted };
+
+            List<TrackTime> trackTimes = new List<TrackTime>();
+            foreach (var item in result)
+            {
+                TrackTime tt = new TrackTime();
+                tt.Id = item.Id;
+                tt.IdCar = item.IdCar;
+                tt.NameCar = item.NameCar;
+                tt.IdTrack = item.IdTrack;
+                tt.NameTrack = item.NameTrack;
+                tt.BestTimeLap = item.BestTimeLap;
+                tt.IsDeleted = item.IsDeleted;
+                trackTimes.Add(tt);
+            }
 
             return trackTimes;
         }
@@ -26,16 +51,15 @@ namespace WebClientWebApi2.Negocio
         public async Task<int> SetTrackTime(TrackTime trackTime)
         {
             TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
-            return await trackTimeDAL.SetTrackTime(trackTime);
-            
+            return await trackTimeDAL.SetTrackTime(trackTime);            
         }
 
         public async Task<TrackTime> GetTrackTime(int id)
         {
-            TrackTimeDAL trackTimeDAL = new TrackTimeDAL();
+            
             TrackTime trackTime;
 
-            List<TrackTime> trackTimesList = await trackTimeDAL.GetTrackTimes();
+            List<TrackTime> trackTimesList = await GetTrackTimes();
 
             trackTime = trackTimesList.First(t => t.Id == id);
 
@@ -77,8 +101,8 @@ namespace WebClientWebApi2.Negocio
 
         public async Task<List<SelectListItem>> GetCarSelectList()
         {
-            CarDAL carDAL = new CarDAL();
-            List<Car> cars = await carDAL.GetCars();
+            CarNG carNG = new CarNG();
+            List<Car> cars = await carNG.GetCars();
 
             List<SelectListItem> listItem = new List<SelectListItem>();
 
@@ -87,8 +111,8 @@ namespace WebClientWebApi2.Negocio
                 listItem.Add(new SelectListItem
                 {
                     Value = c.Id.ToString(),
-                    Text = c.NameBrand + c.NameModel + c.Year.ToString()    
-                });
+                    Text = c.Name
+                }); ;
             }
 
             return listItem;

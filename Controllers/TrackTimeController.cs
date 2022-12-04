@@ -17,9 +17,7 @@ namespace WebClientWebApi2.Controllers
             List<TrackTime> trackTimes = new List<TrackTime>();
 
             trackTimes = await trackTimeNG.GetTrackTimes();
-
-            //TODO - retornar TrackTimeVw
-
+                        
             return View(trackTimes);
         }
 
@@ -35,8 +33,7 @@ namespace WebClientWebApi2.Controllers
         public async Task<ActionResult> Create(FormCollection collection)
         {
             try
-            {
-                
+            {                
                 TrackTimeNG trackTimeNG = new TrackTimeNG();
                 TrackTime trackTime = new TrackTime();
 
