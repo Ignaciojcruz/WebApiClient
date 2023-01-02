@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebClientWebApi2.DAL;
+using WebClientWebApi2.Negocio;
 using WebClientWebApi2.Models;
 
 namespace WebClientWebApi2.Controllers
@@ -12,10 +12,10 @@ namespace WebClientWebApi2.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            TypeDAL typeDAL = new TypeDAL();
+            TypeNG typeNG = new TypeNG();
             List<Type> types;
 
-            types = await typeDAL.GetTypes();
+            types = await typeNG.GetTypes();
 
             return View(types);
         }
@@ -30,14 +30,14 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-                TypeDAL typeDAL = new TypeDAL();
+                TypeNG typeNG = new TypeNG();
                 Type type = new Type();
 
                 type.Id = System.Convert.ToInt32(collection["Id"]);                
                 type.Name = collection["Name"].ToString();
                 type.IsDeleted = System.Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await typeDAL.SetType(type);
+                int resp = await typeNG.SetType(type);
 
                 return RedirectToAction("Index");
             }
@@ -49,10 +49,10 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            TypeDAL typeDAL = new TypeDAL();
+            TypeNG typeNG = new TypeNG();
             Type type;
 
-            type = await typeDAL.GetType(id);
+            type = await typeNG.GetType(id);
 
             return View(type);
         }
@@ -64,14 +64,14 @@ namespace WebClientWebApi2.Controllers
             try
             {
 
-                TypeDAL typeDAL = new TypeDAL();
+                TypeNG typeNG = new TypeNG();
                 Type type = new Type();
 
                 type.Id = System.Convert.ToInt32(collection["Id"]);
                 type.Name = collection["Name"].ToString();
                 type.IsDeleted = System.Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await typeDAL.SetType(type);
+                int resp = await typeNG.SetType(type);
 
                 return RedirectToAction("Index");
             }
@@ -83,20 +83,20 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Details(int id)
         {
-            TypeDAL typeDAL = new TypeDAL();
+            TypeNG typeNG = new TypeNG();
             Type type = new Type();
 
-            type = await typeDAL.GetType(id);
+            type = await typeNG.GetType(id);
 
             return View(type);
         }
 
         public async Task<ActionResult> Delete(int id)
         {
-            TypeDAL typeDAL = new TypeDAL();
+            TypeNG typeNG = new TypeNG();
             Type type = new Type();
 
-            type = await typeDAL.GetType(id);
+            type = await typeNG.GetType(id);
 
             return View(type);
         }
@@ -107,13 +107,13 @@ namespace WebClientWebApi2.Controllers
             try
             {
 
-                TypeDAL typeDAL = new TypeDAL();
+                TypeNG typeNG = new TypeNG();
                 Type type = new Type();
 
                 type.Id = id;
                 type.IsDeleted = true;
 
-                int resp = await typeDAL.SetType(type);
+                int resp = await typeNG.SetType(type);
 
                 return RedirectToAction("Index");
             }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebClientWebApi2.DAL;
+using WebClientWebApi2.Negocio;
 using WebClientWebApi2.Models;
 
 namespace WebClientWebApi2.Controllers
@@ -13,10 +13,10 @@ namespace WebClientWebApi2.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            CountryDAL countryDAL = new CountryDAL();
+            CountryNG countryNG = new CountryNG();
             List<Country> countrys = new List<Country>();
 
-            countrys = await countryDAL.GetCountrys();
+            countrys = await countryNG.GetCountrys();
 
             return View(countrys);
         }
@@ -31,15 +31,14 @@ namespace WebClientWebApi2.Controllers
         {
             try
             {
-
-                CountryDAL countryDAL = new CountryDAL();
+                CountryNG countryNG = new CountryNG();  
                 Country country = new Country();
 
                 country.Id = Convert.ToInt32(collection["Id"]);
                 country.Name = collection["Name"].ToString();                
                 country.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await countryDAL.SetCountry(country);
+                int resp = await countryNG.SetCountry(country);
 
                 return RedirectToAction("Index");
             }
@@ -51,10 +50,10 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            CountryDAL countryDAL = new CountryDAL();
+            CountryNG countryNG = new CountryNG();
             Country country;
 
-            country = await countryDAL.GetCountry(id);
+            country = await countryNG.GetCountry(id);
 
             return View(country);
         }
@@ -66,14 +65,14 @@ namespace WebClientWebApi2.Controllers
             try
             {
 
-                CountryDAL countryDAL = new CountryDAL();
+                CountryNG countryNG = new CountryNG();
                 Country country = new Country();
 
                 country.Id = Convert.ToInt32(collection["Id"]);
                 country.Name = collection["Name"].ToString();                
                 country.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await countryDAL.SetCountry(country);
+                int resp = await countryNG.SetCountry(country);
 
                 return RedirectToAction("Index");
             }
@@ -85,20 +84,20 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Details(int id)
         {
-            CountryDAL countryDAL = new CountryDAL();
+            CountryNG countryNG = new CountryNG();
             Country country = new Country();
 
-            country = await countryDAL.GetCountry(id);
+            country = await countryNG.GetCountry(id);
 
             return View(country);
         }
 
         public async Task<ActionResult> Delete(int id)
         {
-            CountryDAL countryDAL = new CountryDAL();
+            CountryNG countryNG = new CountryNG();
             Country country = new Country();
 
-            country = await countryDAL.GetCountry(id);
+            country = await countryNG.GetCountry(id);
 
             return View(country);
         }
@@ -109,13 +108,13 @@ namespace WebClientWebApi2.Controllers
             try
             {
 
-                CountryDAL countryDAL = new CountryDAL();
+                CountryNG countryNG = new CountryNG();
                 Country country = new Country();
 
                 country.Id = id;
                 country.IsDeleted = true;
 
-                int resp = await countryDAL.SetCountry(country);
+                int resp = await countryNG.SetCountry(country);
 
                 return RedirectToAction("Index");
             }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebClientWebApi2.DAL;
+using WebClientWebApi2.Negocio;
 using WebClientWebApi2.Models;
 
 namespace WebClientWebApi2.Controllers
@@ -13,10 +13,10 @@ namespace WebClientWebApi2.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            TrackDAL trackDAL = new TrackDAL();
-            List<Track> tracks = new List<Track>();
+            TrackNG trackNG = new TrackNG();
+            List<Track> tracks;
 
-            tracks = await trackDAL.GetTracks();
+            tracks = await trackNG.GetTracks();
 
             return View(tracks);
         }
@@ -32,7 +32,7 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                TrackDAL trackDAL = new TrackDAL();
+                TrackNG trackNG = new TrackNG();
                 Track track = new Track();
 
                 track.Id = Convert.ToInt32(collection["Id"]);
@@ -40,7 +40,7 @@ namespace WebClientWebApi2.Controllers
                 track.Length = Convert.ToInt32(collection["Length"]);                
                 track.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await trackDAL.SetTrack(track);
+                int resp = await trackNG.SetTrack(track);
 
                 return RedirectToAction("Index");
             }
@@ -52,10 +52,10 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Edit(int id)
         {
-            TrackDAL trackDAL = new TrackDAL();
+            TrackNG trackNG = new TrackNG();
             Track track;
 
-            track = await trackDAL.GetTrack(id);
+            track = await trackNG.GetTrack(id);
 
             return View(track);
         }
@@ -67,7 +67,7 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                TrackDAL trackDAL = new TrackDAL();
+                TrackNG trackNG = new TrackNG();
                 Track track = new Track();
 
                 track.Id = Convert.ToInt32(collection["Id"]);
@@ -75,7 +75,7 @@ namespace WebClientWebApi2.Controllers
                 track.Length = Convert.ToInt32(collection["Length"]);                
                 track.IsDeleted = Convert.ToBoolean(collection["IsDeleted"]);
 
-                int resp = await trackDAL.SetTrack(track);
+                int resp = await trackNG.SetTrack(track);
 
                 return RedirectToAction("Index");
             }
@@ -87,20 +87,20 @@ namespace WebClientWebApi2.Controllers
 
         public async Task<ActionResult> Details(int id)
         {
-            TrackDAL trackDAL = new TrackDAL();
+            TrackNG trackNG = new TrackNG();
             Track track = new Track();
 
-            track = await trackDAL.GetTrack(id);
+            track = await trackNG.GetTrack(id);
 
             return View(track);
         }
 
         public async Task<ActionResult> Delete(int id)
         {
-            TrackDAL trackDAL = new TrackDAL();
+            TrackNG trackNG = new TrackNG();
             Track track = new Track();
 
-            track = await trackDAL.GetTrack(id);
+            track = await trackNG.GetTrack(id);
 
             return View(track);
         }
@@ -111,13 +111,13 @@ namespace WebClientWebApi2.Controllers
             try
             {
                 
-                TrackDAL trackDAL = new TrackDAL();
+                TrackNG trackNG = new TrackNG();
                 Track track = new Track();
 
                 track.Id = id;
                 track.IsDeleted = true;
 
-                int resp = await trackDAL.SetTrack(track);
+                int resp = await trackNG.SetTrack(track);
 
                 return RedirectToAction("Index");
             }

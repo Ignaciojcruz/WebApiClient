@@ -153,8 +153,11 @@
     <Compile Include="Models\Type.cs" />
     <Compile Include="Negocio\BrandNG.cs" />
     <Compile Include="Negocio\CarNG.cs" />
+    <Compile Include="Negocio\CountryNG.cs" />
     <Compile Include="Negocio\ModelNG.cs" />
+    <Compile Include="Negocio\TrackNG.cs" />
     <Compile Include="Negocio\TrackTimeNG.cs" />
+    <Compile Include="Negocio\TypeNG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
